@@ -1,5 +1,5 @@
 const axios = require('axios');
-axios.defaults.baseURL = "https://cuddly-system-6r7955qwj5724r7q-8002.app.github.dev/";
+axios.defaults.baseURL = "https://localhost:8002";
 
 
 const testLogin = ()=>{

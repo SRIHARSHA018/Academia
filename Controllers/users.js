@@ -8,7 +8,6 @@ exports.getTest = (req, res, next) => {
 };
 
 exports.userLogin = async (req, res, next) => {
-  console.log(req.body);
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
