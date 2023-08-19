@@ -3,13 +3,16 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 exports.getTest = (req, res, next) => {
+  console.log("Hey there");
   res.status(200).send("Hey there!");
 };
 
 exports.userLogin = async (req, res, next) => {
+  console.log(req.body);
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
+    console.log("I am here.");
     if (!user) {
       return res.status(401).send({ message: "Authentication failed." });
     }
