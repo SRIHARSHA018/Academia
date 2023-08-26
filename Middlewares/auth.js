@@ -3,8 +3,8 @@ const User = require("../Models/users");
 
 const config = process.env;
 const verifyToken = async (req, res, next) => {
-  const token =
-    req.body.token || req.query.token || req.headers["x-access-token"];
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1]; // Extract the token part from "Bearer <token>"
   if (!token) {
     return res.status(403).send("Access denied. Token missing.");
   }

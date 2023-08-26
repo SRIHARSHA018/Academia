@@ -78,3 +78,17 @@ exports.userSignUp = async (req, res, next) => {
     console.log(err);
   }
 };
+
+exports.userDashboard = async (req, res, next) => {
+  try {
+    // Access the user information from req.user
+    const user = req.user;
+
+    // Your protected route logic
+    res
+      .status(200)
+      .send({ message: "Protected route accessed successfully.", user });
+  } catch (err) {
+    res.status(401).send({ message: "Access Denied", error: err });
+  }
+};
