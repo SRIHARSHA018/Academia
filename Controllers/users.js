@@ -10,10 +10,12 @@ exports.getTest = (req, res, next) => {
 exports.userLogin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(401).send({ message: "Email and password are required." });
+    }
     const user = await User.findOne({ email });
-    console.log("I am here.");
     if (!user) {
-      return res.status(401).send({ message: "Authentication failed." });
+      return res.status(401).send({ message: "User not found, Please Sign up" });
     }
 
     // Compare the provided password with the stored hashed password

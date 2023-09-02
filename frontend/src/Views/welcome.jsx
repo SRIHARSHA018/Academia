@@ -21,6 +21,7 @@ class WelcomeView extends React.Component {
         if (response.status === 200) {
           this.setState({ isAuthorized: true });
         }
+        localStorage.setItem('user_id',response.data.user._id);
       } catch (err) {
         console.error(err);
       }
@@ -30,15 +31,18 @@ class WelcomeView extends React.Component {
   render() {
     return (
       <div>
+        <div className="header__container">
         {this.state.isAuthorized ? "Welcome" :"Threat" }
         {this.state.isAuthorized && <Link to="/users/login"
           onClick={() => {
             localStorage.removeItem("jwtToken");
+            localStorage.removeItem('user_id');
             this.setState({ isAuthorized: false });
           }}
         >
           <Button variant="outlined">Log out</Button>        
         </Link>}
+        </div>
         <div>
           <CoursesView/>
         </div>
