@@ -32,6 +32,10 @@ const UserSchema = new Schema({
   resetTokenExpiry: {
     type: Date, // Store the expiration date of the password reset token
   },
+  enrolledCourse:{
+    type:[String],
+    default:[],
+  }
 });
 
 module.exports = mongoose.model("User", UserSchema);

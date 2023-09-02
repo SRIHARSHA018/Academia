@@ -19,8 +19,6 @@ class LoginView extends React.Component {
   }
   validateCredentials() {}
   async handleLogin() {
-    axios.defaults.baseURL =
-      "https://cuddly-system-6r7955qwj5724r7q-8002.app.github.dev/api";
     try {
       let loggedInDetails = await axios.post("/users/login", this.state);
       console.log(loggedInDetails);

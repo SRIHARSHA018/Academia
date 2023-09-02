@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
 import {Link} from 'react-router-dom';
-
+import {Button} from '@mui/material';
+import CoursesView from "./courses";
 
 class WelcomeView extends React.Component {
   state = {
@@ -15,8 +16,6 @@ class WelcomeView extends React.Component {
       },
     };
     const handleAuth = async () => {
-      axios.defaults.baseURL =
-        "https://cuddly-system-6r7955qwj5724r7q-8002.app.github.dev/api";
       try {
         let response = await axios.get("/users/welcome", config);
         if (response.status === 200) {
@@ -38,8 +37,11 @@ class WelcomeView extends React.Component {
             this.setState({ isAuthorized: false });
           }}
         >
-          Log out
+          <Button variant="outlined">Log out</Button>        
         </Link>}
+        <div>
+          <CoursesView/>
+        </div>
       </div>
     );
   }

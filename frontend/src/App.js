@@ -6,8 +6,14 @@ import NotFoundView from "./Views/notfound";
 import SignUpView from "./Views/signup";
 import WelcomeView from "./Views/welcome";
 import { Route, Routes } from "react-router-dom";
+import axios from "axios";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    axios.defaults.baseURL =
+    "https://cuddly-system-6r7955qwj5724r7q-8002.app.github.dev/api";
+  },[]);
   return (
     <div className="App">
       <Routes>
