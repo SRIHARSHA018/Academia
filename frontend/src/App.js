@@ -8,6 +8,7 @@ import WelcomeView from "./Views/welcome";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
+import Header from "./Views/header";
 
 function App() {
   useEffect(() => {
@@ -16,6 +17,7 @@ function App() {
   },[]);
   return (
     <div className="App">
+      <Header/>
       <Routes>
         <Route path="*" Component={NotFoundView}></Route>
         <Route exact path="/" Component={HomeView}></Route>
