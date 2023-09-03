@@ -32,7 +32,7 @@ const UserSchema = new Schema({
   resetTokenExpiry: {
     type: Date, // Store the expiration date of the password reset token
   },
-  enrolledCourse:{
+  enrolledCourses:{
     type:[Schema.Types.ObjectId],
     default:[],
   }

@@ -18,20 +18,33 @@ class CoursesView extends Component {
         console.error("Error fetching courses:", error);
         this.setState({ isLoading: false }); // Set isLoading to false on error as well
       });
+
+  }
+  enrollCourse(courseId){
+    const token = localStorage.getItem("jwtToken");
+    const user_id = localStorage.getItem("user_id");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    axios.post('/courses/enroll',{user_id,course_id:courseId},config).then(res=>{
+      console.log(res);
+    }).catch(error=>console.log(error));
   }
 
   render() {
     return (
       <div>
         <Typography variant="h4" gutterBottom>
-          Course List
+          Explore
         </Typography>
         {this.state.isLoading ? ( // Show loading animation when isLoading is true
           <CircularProgress />
         ) : (
           this.state.courses.map((course) => (
             <Card
-              key={course.id}
+              key={course._id}
               variant="outlined"
               sx={{ marginBottom: 2, width: "400px" }}
             >
@@ -40,7 +53,7 @@ class CoursesView extends Component {
                 <Typography variant="body2" color="text.secondary">
                   {course.description}
                 </Typography>
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary" onClick={()=>this.enrollCourse(course._id)}>
                   Enroll
                 </Button>
               </CardContent>
