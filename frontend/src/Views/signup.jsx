@@ -8,7 +8,9 @@ import {
   Typography,
   Alert,
   CircularProgress,
+  Divider,
 } from "@mui/material";
+import {Link} from 'react-router-dom';
 
 import validator from "validator";
 
@@ -43,6 +45,10 @@ const styles = {
   error: {
     width: "100%",
     marginBottom: "1rem",
+  },
+  divider: {
+    width: "100%",
+    margin: "1rem 0", // Add margin for spacing
   },
 };
 
@@ -178,6 +184,14 @@ class SignUpView extends React.Component {
             ) : (
               "Register"
             )}
+          </Button>
+          <Divider style={styles.divider}/>
+          <Button
+            color="primary"
+            variant="contained"
+            style={styles.submitButton}
+          >
+            <Link style={{textDecoration:"none",color:"white"}} to="/users/login">Login</Link>
           </Button>
         </div>
       </Container>

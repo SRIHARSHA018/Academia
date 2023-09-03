@@ -1,13 +1,14 @@
 import React from "react";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import {
   Container,
   TextField,
   Button,
   Typography,
   Alert,
-  CircularProgress, // Import CircularProgress for loading animation
+  CircularProgress,
+  Divider, // Import Divider for the line
 } from "@mui/material";
 
 import validator from "validator";
@@ -44,7 +45,12 @@ const styles = {
     width: "100%",
     marginBottom: "1rem",
   },
+  divider: {
+    width: "100%",
+    margin: "1rem 0", // Add margin for spacing
+  },
 };
+
 class LoginView extends React.Component {
   state = {
     email: "",
@@ -66,24 +72,24 @@ class LoginView extends React.Component {
     try {
       const { email, password } = this.state;
 
-      // Validate the email using the validator library
+// Validate the email using the validator library
       if (!validator.isEmail(email)) {
         throw new Error("Invalid email address");
       }
-      // Validate the password (e.g., minimum length)
+// Validate the password (e.g., minimum length)
       if (!validator.isLength(password, { min: 6 })) {
         throw new Error("Password must be at least 6 characters long");
       }
 
-      // Set loading state to true while making the login request
+// Set loading state to true while making the login request
       this.setState({ isLoading: true });
 
       let loggedInDetails = await axios.post("/users/login", this.state);
-      //console.log(loggedInDetails);
+//console.log(loggedInDetails);
       this.setState({ isLoggedIn: true });
       localStorage.setItem("jwtToken", loggedInDetails.data.user.token || "");
     } catch (error) {
-      //console.log(error);
+//console.log(error);
       let errorMessage = error.response
         ? error.response.data.message
         : error.message;
@@ -92,7 +98,7 @@ class LoginView extends React.Component {
         errorMessage,
       });
     } finally {
-      // Set loading state back to false after login request is complete
+// Set loading state back to false after login request is complete
       this.setState({ isLoading: false });
     }
   }
@@ -147,6 +153,19 @@ class LoginView extends React.Component {
             ) : (
               "Login"
             )}
+          </Button>
+          <Divider style={styles.divider} /> {/* Divider line */}
+          <Button
+            color="primary"
+            variant="contained"
+            style={styles.submitButton}
+          >
+            <Link
+              style={{ textDecoration: "none", color: "white" }}
+              to="/users/signup"
+            >
+              SignUp
+            </Link>
           </Button>
         </div>
       </Container>
