@@ -12,6 +12,7 @@ const courseSchema = new mongoose.Schema({
     required: true,
   },
   duration: Number,
+  enrolledUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 });
 
 module.exports = mongoose.model('Course', courseSchema);
